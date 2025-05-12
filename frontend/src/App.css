@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Doto:wght,ROND@800,100&display=swap");
+@import "tailwindcss";
+@theme {
+  --font-doto: Doto, sans-serif;
+
+  --color-black: oklch(0 0.2 0);
+  --color-transparent: transparent;
+  --color-white: oklch(1 0.2 0);
+
+  /* Rich Black Shades */
+  --color-richblack-5: oklch(1 0.2 235.7);
+  --color-richblack-25: oklch(0.9176 0.2 232);
+  --color-richblack-50: oklch(0.8314 0.2 232);
+  --color-richblack-100: oklch(0.749 0.2 228.8);
+  --color-richblack-200: oklch(0.6667 0.2 225.9);
+  --color-richblack-300: oklch(0.5804 0.2 222.4);
+  --color-richblack-400: oklch(0.498 0.2 225.9);
+  --color-richblack-500: oklch(0.4118 0.2 222.4);
+  --color-richblack-600: oklch(0.3294 0.2 220);
+  --color-richblack-700: oklch(0.2471 0.2 217.9);
+  --color-richblack-800: oklch(0.1608 0.2 217.9);
+  --color-richblack-900: oklch(0.0784 0.2 216);
+
+  /* Rich Blue Shades */
+  --color-richblue-5: oklch(95.7% 0.03 250);
+  --color-richblue-25: oklch(85.3% 0.04 250);
+  --color-richblue-50: oklch(75% 0.05 250);
+  --color-richblue-100: oklch(64.7% 0.06 250);
+  --color-richblue-200: oklch(54.5% 0.07 250);
+  --color-richblue-300: oklch(44.1% 0.08 250);
+  --color-richblue-400: oklch(33.7% 0.09 250);
+  --color-richblue-500: oklch(30% 0.09 250);
+  --color-richblue-600: oklch(26.3% 0.08 250);
+  --color-richblue-700: oklch(22.6% 0.07 250);
+  --color-richblue-800: oklch(18.9% 0.06 250);
+  --color-richblue-900: oklch(15.2% 0.05 250);
+
+  /* Blue Shades */
+  --color-blue-5: oklch(94.9% 0.04 230);
+  --color-blue-25: oklch(80% 0.05 230);
+  --color-blue-50: oklch(65.1% 0.06 230);
+  --color-blue-100: oklch(50.2% 0.07 230);
+  --color-blue-200: oklch(35.3% 0.08 230);
+  --color-blue-300: oklch(31.4% 0.08 230);
+  --color-blue-400: oklch(27.5% 0.07 230);
+  --color-blue-500: oklch(23.5% 0.06 230);
+  --color-blue-600: oklch(19.6% 0.05 230);
+  --color-blue-700: oklch(15.7% 0.04 230);
+  --color-blue-800: oklch(11.8% 0.03 230);
+  --color-blue-900: oklch(7.8% 0.02 230);
+
+  /* Brown Shades */
+  --color-brown-5: oklch(1 0.2 48.8);
+  --color-brown-25: oklch(1 0.2 44.2);
+  --color-brown-50: oklch(1 0.2 42);
+  --color-brown-100: oklch(0.9059 0.2 41.6);
+  --color-brown-200: oklch(0.8118 0.2 40.8);
+  --color-brown-300: oklch(0.7216 0.2 39.8);
+  --color-brown-400: oklch(0.6275 0.2 39);
+  --color-brown-500: oklch(0.5333 0.2 37.6);
+  --color-brown-600: oklch(0.4392 0.2 36.2);
+  --color-brown-700: oklch(0.349 0.2 33.6);
+  --color-brown-800: oklch(0.2549 0.2 30);
+  --color-brown-900: oklch(0.1608 0.2 24.9);
+
+  /* Pink Shades */
+  --color-pink-5: oklch(1 0.2 0);
+  --color-pink-25: oklch(0.9843 0.2 348.5);
+  --color-pink-50: oklch(0.9686 0.2 346.8);
+  --color-pink-100: oklch(0.9529 0.2 346);
+  --color-pink-200: oklch(0.9373 0.2 345.7);
+  --color-pink-300: oklch(0.8314 0.2 344.9);
+  --color-pink-400: oklch(0.7294 0.2 344.4);
+  --color-pink-500: oklch(0.6235 0.2 343.2);
+  --color-pink-600: oklch(0.5176 0.2 341.2);
+  --color-pink-700: oklch(0.4118 0.2 338.8);
+  --color-pink-800: oklch(0.3098 0.2 336.5);
+  --color-pink-900: oklch(0.2039 0.2 331.2);
+
+  /* Yellow Shades */
+  --color-yellow-5: oklch(1 0.2 57.5);
+  --color-yellow-25: oklch(1 0.2 52.9);
+  --color-yellow-50: oklch(1 0.2 50);
+  --color-yellow-100: oklch(0.9059 0.2 49.5);
+  --color-yellow-200: oklch(0.8118 0.2 49.1);
+  --color-yellow-300: oklch(0.7137 0.2 48.7);
+  --color-yellow-400: oklch(0.6196 0.2 48.2);
+  --color-yellow-500: oklch(0.5255 0.2 47.1);
+  --color-yellow-600: oklch(0.4314 0.2 46);
+  --color-yellow-700: oklch(0.3333 0.2 44.1);
+  --color-yellow-800: oklch(0.2392 0.2 41);
+  --color-yellow-900: oklch(0.1451 0.2 32.4);
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.homepage_bg {
+  background-image: url("../src/assets//Images/bghome.svg");
+}
