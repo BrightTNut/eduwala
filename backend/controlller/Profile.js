@@ -1,7 +1,7 @@
 import Coures from "../models/Course.js";
 import Profile from "../models/Profile.js";
 import User from "../models/User.js";
-
+import { imageUpload } from "../utils/imageUploader.js";
 export const updaetProfile = async (req, res) => {
   try {
     const { dateOfBirth = "", about = "", gender, contactNumber } = req.body;
@@ -37,8 +37,9 @@ export const updaetProfile = async (req, res) => {
 
 export const deleteAccount = async (req, res) => {
   try {
-    const { userId } = req.user.id;
-    const userDetails = await User.findById(userId);
+    const userId = req.user.id;
+    console.log(userId);
+    const userDetails = await User.findById({ _id: userId });
     if (!userDetails) {
       return res.status(401).json({
         success: false,
@@ -46,7 +47,7 @@ export const deleteAccount = async (req, res) => {
       });
     }
     //todo unenrolled from all enrolled courses
-    await Coures.findByIdAndDelete({ studentEnrolled: userId });
+    await Coures.findOneAndDelete({ studentEnrolled: userId });
     await Profile.findByIdAndDelete({ _id: userDetails.additionalDetails });
     await User.findByIdAndDelete({ _id: userId });
 
@@ -64,15 +65,14 @@ export const deleteAccount = async (req, res) => {
   }
 };
 
-export const getAllUserDetails = async (req, res) => {
+export const getUserDetails = async (req, res) => {
   try {
-    const { id } = req.user.id;
-    const allUser = await User.findById(id)
-      .populate("additionalDetails")
-      .exec();
+    const { id } = req.user;
+    const Userd = await User.findById(id).populate("additionalDetails").exec();
     return res.status(200).json({
       success: true,
       message: "All user Fetched!!!",
+      data: Userd,
     });
   } catch (error) {
     console.log(error);
@@ -118,7 +118,7 @@ export const updateDisplayPicture = async (req, res) => {
   try {
     const displayPicture = req.files.displayPicture;
     const userId = req.user.id;
-    const image = await uploadImageToCloudinary(
+    const image = await imageUpload(
       displayPicture,
       process.env.FOLDER_NAME,
       1000,
@@ -136,6 +136,7 @@ export const updateDisplayPicture = async (req, res) => {
       data: updatedProfile,
     });
   } catch (error) {
+    console.log("ERror in controller");
     return res.status(500).json({
       success: false,
       message: error.message,

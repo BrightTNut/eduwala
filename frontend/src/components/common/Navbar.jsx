@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import ProfileDropDown from "../core/Auth/ProfileDropDown";
 import { apiConnector } from "../../services/apiConnector";
 import { categories } from "../../services/apis";
+import { IoIosArrowDropdown } from "react-icons/io";
 const Navbar = () => {
   //use selectors of slices
   const { token } = useSelector((state) => state.auth);
@@ -17,8 +18,7 @@ const Navbar = () => {
   const fetchCatalogs = async () => {
     try {
       const result = await apiConnector("GET", categories.CATAGORIES_API);
-      SetSubLinks(result.data.data);
-      console.log("Tag fetched successfullly", result.data.data);
+      SetSubLinks(result.data.allCategorys);
     } catch (error) {
       console.log("fetching all categories !!", error);
       console.error(error);
@@ -42,7 +42,30 @@ const Navbar = () => {
             {NavbarLinks.map((ele, index) => (
               <li key={index}>
                 {ele.title === "Catalog" ? (
-                  <div>{ele.title} </div>
+                  <div className="flex items-center gap-2 group">
+                    <p>{ele.title}</p>
+                    <IoIosArrowDropdown />{" "}
+                    <div
+                      className="invisible absolute left-[47.7%] z-[1000] flex  translate-x-[-50%] 
+                     flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-150 
+                    group-hover:visible group-hover:translate-y-[5em] group-hover:opacity-100 "
+                    >
+                      <div
+                        className="absolute top-[-2rem]   h-6  left-[33%]
+                    w-6 rotate-45 rounded bg-richblack-5 invisible opacity-0
+                    group-hover:opacity-100 group-hover:translate-y-[1.65em] group-hover:visible"
+                      ></div>
+                      {subLinks.length ? (
+                        subLinks.map((ele) => (
+                          <Link to={ele.name} key={ele._id}>
+                            {ele.name}
+                          </Link>
+                        ))
+                      ) : (
+                        <div></div>
+                      )}
+                    </div>
+                  </div>
                 ) : (
                   <Link to={ele?.path}>
                     <p

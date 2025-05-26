@@ -2,12 +2,12 @@ import User from "../models/User.js";
 import mailSender from "../utils/mailSender.js";
 //import { resetPassowrd } from "./Auth";
 import bcrypt from "bcrypt";
-
+import crypto from "crypto";
 //resetPassword mail sending
 export const resetPasswordToken = async (req, res) => {
   try {
     //get mail
-    const { email } = req.body.email;
+    const { email } = req.body;
     //check user for mail
     const user = await User.findOne({ email: email });
     if (!user) {
@@ -17,7 +17,7 @@ export const resetPasswordToken = async (req, res) => {
       });
     }
     //generate token
-    const token = crypto.randomUUID();
+    const token = crypto.randomBytes(20).toString("hex");
     //update user adding token and expiration time
     const updatedDetails = await User.findOneAndUpdate(
       { email: email },
@@ -75,12 +75,12 @@ export const resetPassword = async (req, res) => {
       });
     }
     //hash password
-    const hashPassword = bcrypt.hash(password, 10);
+
     //update in database
     await User.findOneAndUpdate(
       { email: email },
       {
-        password: hashPassword,
+        password: password,
       },
       { new: true }
     );

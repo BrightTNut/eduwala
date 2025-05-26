@@ -8,7 +8,8 @@ import courseRoutes from "./routes/Course.js";
 
 import { connect } from "./config/database.js";
 import cookieParser from "cookie-parser";
-// const core = require("core");
+import cors from "cors";
+//var cors = require("cors");
 import { cloudinaryConnect } from "./config/cloudinary.js";
 import fileUpload from "express-fileupload";
 import { config } from "dotenv";
@@ -20,12 +21,11 @@ connect();
 //middleware
 app.use(json());
 app.use(cookieParser());
-// app.use(
-//   cors({
-//     origin: "http://localhost:5173/",
-//     Credential: true,
-//   })
-// );
+app.use(cors());
+var corsOptions = {
+  origin: "http://localhost:5173",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 app.use(
   fileUpload({
     useTempFiles: true,
@@ -36,10 +36,10 @@ app.use(
 cloudinaryConnect();
 
 //routes'
-app.use("/api/v1/auth", userRoutes);
-app.use("/api/v1/profile", profileRoutes);
-app.use("/api/v1/course", courseRoutes);
-app.use("/api/v1/payment", paymentRoutes);
+app.use("/api/v1/auth", cors(corsOptions), userRoutes);
+app.use("/api/v1/profile", cors(corsOptions), profileRoutes);
+app.use("/api/v1/course", cors(corsOptions), courseRoutes);
+app.use("/api/v1/payment", cors(corsOptions), paymentRoutes);
 
 app.get("/", (req, res) => {
   return res.json({

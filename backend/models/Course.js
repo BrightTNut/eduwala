@@ -31,7 +31,6 @@ const coureseSchema = new mongoose.Schema({
   },
   tag: {
     type: [String],
-    required: true,
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
@@ -45,9 +44,12 @@ const coureseSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
-  instructions: {
-    type: [String],
-  },
+  instructions: [
+    {
+      title: { type: String, required: true },
+      description: { type: String, required: true },
+    },
+  ],
   status: {
     type: String,
     enum: ["Draft", "Published"],

@@ -5,8 +5,9 @@ import Course from "../models/Course.js";
 export const createCategory = async (req, res) => {
   try {
     const { name, description } = req.body;
+
     if (!name || !description) {
-      return res.statu(401).json({
+      return res.status(401).json({
         success: false,
         message: "All fiealds are required!!",
       });
@@ -33,13 +34,11 @@ export const createCategory = async (req, res) => {
 //getAllCategorys handler function
 export const showAllCategories = async (req, res) => {
   try {
-    const allCategorys = await Category.find({
-      name: name,
-      description: description,
-    });
+    const allCategorys = await Category.find({});
     return res.status(200).json({
       success: true,
       message: "All Categorys Fectched Successfully!!!",
+      allCategorys,
     });
   } catch (error) {
     console.log(error);
@@ -56,9 +55,9 @@ export const CategoryPageDetails = async (req, res) => {
   try {
     const { categoryId } = req.body;
     const selectedCategories = await Category.findById(categoryId)
-      .populate(course)
+      .populate("course")
       .exec();
-    if (!Categories) {
+    if (!selectedCategories) {
       return res.status(401).json({
         success: false,
         message: "Category Course not found!!",
@@ -87,7 +86,7 @@ export const CategoryPageDetails = async (req, res) => {
       },
     ]);
 
-    return status(200).json({
+    return res.status(200).json({
       success: true,
       data: {
         selectedCategories,

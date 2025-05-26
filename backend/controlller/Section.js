@@ -12,7 +12,7 @@ export const createSection = async (req, res) => {
     }
 
     const newSection = await Section.create({ sectionName });
-    const updateCourse = await Course.findByAndUpdate(
+    const updateCourse = await Course.findByIdAndUpdate(
       courseId,
       {
         $push: {
@@ -29,7 +29,7 @@ export const createSection = async (req, res) => {
   } catch (error) {
     console.log(error);
     console.error(error);
-    return res.staus(401).json({
+    return res.status(401).json({
       success: false,
       message: "Error during creating Section in Controller!!",
       error: error.message,

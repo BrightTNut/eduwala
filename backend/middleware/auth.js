@@ -19,7 +19,7 @@ export const auth = async (req, res, next) => {
 
     try {
       // Verifying the JWT using the secret key stored in environment variables
-      const decode = await jwt.verify(token, process.env.JWT_SECRET);
+      const decode = jwt.verify(token, process.env.JWT_SECRET);
       console.log(decode);
       // Storing the decoded JWT payload in the request object for further use
       req.user = decode;
@@ -69,6 +69,8 @@ export const isInstructor = async (req, res, next) => {
         message: "This is Protected Route for Instructor Only!!",
       });
     }
+
+    next();
   } catch (error) {
     console.log(error);
     console.error(error);
@@ -82,12 +84,14 @@ export const isInstructor = async (req, res, next) => {
 //isAdmin
 export const isAdmin = async (req, res, next) => {
   try {
+    console.log(req.user);
     if (req.user.accountType !== "Admin") {
       return res.status(401).json({
         success: false,
         message: "This is Protected Route for Admin Only!!",
       });
     }
+    next();
   } catch (error) {
     console.log(error);
     console.error(error);

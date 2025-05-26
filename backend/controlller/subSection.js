@@ -4,11 +4,13 @@ import { imageUpload } from "../utils/imageUploader.js";
 export const createSubSection = async (req, res) => {
   try {
     const { sectionId, title, timeDuration, description } = req.body;
-    const { videoFile } = req.file;
+    const { videoFile } = req.files;
+    const data = { videoFile, sectionId, title, timeDuration, description };
     if (!sectionId || !title || !timeDuration || !description || !videoFile) {
       return res.status(401).json({
         success: false,
         message: "All fiealds are mandatory!!!",
+        data,
       });
     }
     //upload video
@@ -26,8 +28,8 @@ export const createSubSection = async (req, res) => {
           subSection: subSectionDetails._id,
         },
       },
-      { new: true }.populate("subSection")
-    );
+      { new: true }
+    ).populate("subSection");
     //TODO : log updated section details , after adding populate query
     return res.status(200).json({
       success: true,

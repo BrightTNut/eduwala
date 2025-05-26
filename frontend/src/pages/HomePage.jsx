@@ -6,7 +6,6 @@ import Button from "../components/core/HomePage/Button";
 import git from "../assets/Images/git.gif";
 import CodeBlocks from "../components/core/HomePage/CodeBlocks";
 import Footer from "../components/common/Footer";
-import { FaAccessibleIcon } from "react-icons/fa";
 import TimeLine from "../components/core/HomePage/TimeLine";
 import Learning from "../components/core/HomePage/Learning";
 import InstructorSection from "../components/core/HomePage/InstructorSection";

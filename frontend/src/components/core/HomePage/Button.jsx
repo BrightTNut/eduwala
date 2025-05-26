@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 const Button = ({ children, active, linkto }) => {
   return (
-    <Link to={linkto}>
+    <div to={linkto}>
       <div
         className={`shadow-xl/30 flex gap-2 items-center rounded-md font-bold text-center text-[17px] px-5 py-2
     ${
@@ -11,7 +11,7 @@ const Button = ({ children, active, linkto }) => {
       >
         {children}
       </div>
-    </Link>
+    </div>
   );
 };
 export default Button;

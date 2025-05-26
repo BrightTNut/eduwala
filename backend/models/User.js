@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
   additionalDetails: {
     type: mongoose.Schema.Types.ObjectId,
 
-    refs: "Profile",
+    ref: "Profile",
   },
   courses: {
     type: mongoose.Schema.Types.ObjectId,

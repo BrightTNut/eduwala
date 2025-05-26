@@ -2,13 +2,17 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
-export function connect() {
-  mongoose
-    .connect(process.env.MONGOOSE_URL)
-    .then(() => console.log("Connected to database"))
-    .catch((e) => {
-      console.log(`Error connecting to database:e`, e);
-      console.error(e);
-      process.exit(1); // Exit the process with failure});
-    });
+export async function connect() {
+  if (mongoose.connection.readyState === 1) {
+    console.log("✅ Already connected.");
+    return;
+  }
+
+  try {
+    await mongoose.connect(process.env.MONGOOSE_URL);
+    console.log("✅ Connected to database");
+  } catch (e) {
+    console.error("❌ Error connecting to database:", e.message);
+    process.exit(1);
+  }
 }

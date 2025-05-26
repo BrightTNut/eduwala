@@ -23,7 +23,7 @@ const Footer = () => {
       <div>
         <h1 className="text-5xl pb-9">LOGO</h1>
         {["About", "Careers", "Affiliates"].map((data, i) => (
-          <div key="i">{data}</div>
+          <div key={i}>{data}</div>
         ))}
         <div className="flex gap-4 ">
           <FaFacebook /> <FaGoogle /> <FaTwitter /> <FaYoutube />
